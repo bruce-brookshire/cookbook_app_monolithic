@@ -28,7 +28,7 @@ defmodule Cookbook.Users.User do
     |> validate_required(@req_fields)
   end
   
-  def insert_changeset(%User{} = user, attrs) do
+  def update_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, @all_fields)
     |> validate_required(@req_fields)

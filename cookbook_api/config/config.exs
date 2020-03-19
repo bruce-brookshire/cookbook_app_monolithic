@@ -22,6 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :cookbook, Cookbook.Auth,
+      issuer: "Cookbook",
+      secret_key: "umpN7XAsdpm1GopIIydlZj2GgVnXQ3j48cA2DxWyBchVsn5mXNJs9+JDBBqdX3LN"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

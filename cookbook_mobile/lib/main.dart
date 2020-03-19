@@ -1,28 +1,57 @@
+import 'package:cookbook/login_view.dart';
 import 'package:cookbook/new_entry_view.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MainApp());
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
+  State createState() => _MainAppState();
+}
+
+enum AppState { auth, main }
+
+class _MainAppState extends State<MainApp> {
+  AppState _appState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _appState = AppState.auth;
+
+    DartNotificationCenter.subscribe(
+      channel: "AppState",
+      observer: this,
+      onNotification: (state) => setState(() => _appState = state),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    DartNotificationCenter.unsubscribe(observer: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget currentWidget;
+
+    if (_appState == AppState.auth) 
+      currentWidget = LoginView();
+    else 
+      currentWidget = MyHomePage(title: "Cookbook");
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: ' cookbook'),
+      home: currentWidget,
     );
   }
 }
@@ -46,14 +75,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
