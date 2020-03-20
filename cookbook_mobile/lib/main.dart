@@ -3,6 +3,7 @@ import 'package:cookbook/new_entry_view.dart';
 import 'package:dart_notification_center/dart_notification_center.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'tools.dart';
 
 void main() => runApp(MainApp());
 
@@ -11,8 +12,6 @@ class MainApp extends StatefulWidget {
   @override
   State createState() => _MainAppState();
 }
-
-enum AppState { auth, main }
 
 class _MainAppState extends State<MainApp> {
   AppState _appState;

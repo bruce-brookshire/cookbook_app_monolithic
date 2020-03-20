@@ -1,5 +1,12 @@
+library api;
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+part 'user.dart';
+part 'cookbook.dart';
+part 'invite.dart';
+
 
 class HTTPInterface {
   static const _baseUrl = "http://localhost:4000/api";
@@ -47,19 +54,6 @@ class JsonListMaker {
       content.map<T>((obj) => maker(obj)).toList();
 }
 
-class User {
-  final String email;
-
-  User(this.email);
-
-  static User currentUser;
-
-  static User _fromJson(Map content) {
-    currentUser = User(content['email']);
-    return currentUser;
-  }
-}
-
 class Auth {
   static Future login(String email, String password) async {
     final result = await HTTPInterface.post(
@@ -76,3 +70,5 @@ class Auth {
     return Auth();
   }
 }
+
+DateTime _dateParser(String date) => date == null ? null : DateTime.parse(date);
