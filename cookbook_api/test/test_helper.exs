@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Cookbook.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Cookery.Repo, :manual)

@@ -1,4 +1,4 @@
-defmodule CookbookWeb.ChannelCase do
+defmodule CookeryWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule CookbookWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint CookbookWeb.Endpoint
+      @endpoint CookeryWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Cookbook.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Cookery.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Cookbook.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Cookery.Repo, {:shared, self()})
     end
 
     :ok

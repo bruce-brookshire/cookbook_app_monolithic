@@ -1,12 +1,12 @@
-defmodule CookbookWeb do
+defmodule CookeryWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use CookbookWeb, :controller
-      use CookbookWeb, :view
+      use CookeryWeb, :controller
+      use CookeryWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,26 +19,26 @@ defmodule CookbookWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: CookbookWeb
+      use Phoenix.Controller, namespace: CookeryWeb
 
       import Plug.Conn
-      import CookbookWeb.Gettext
-      alias CookbookWeb.Router.Helpers, as: Routes
+      import CookeryWeb.Gettext
+      alias CookeryWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/cookbook_web/templates",
-        namespace: CookbookWeb
+        root: "lib/cookery_web/templates",
+        namespace: CookeryWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
-      import CookbookWeb.ErrorHelpers
-      import CookbookWeb.Gettext
-      alias CookbookWeb.Router.Helpers, as: Routes
+      import CookeryWeb.ErrorHelpers
+      import CookeryWeb.Gettext
+      alias CookeryWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -53,7 +53,7 @@ defmodule CookbookWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import CookbookWeb.Gettext
+      import CookeryWeb.Gettext
     end
   end
 

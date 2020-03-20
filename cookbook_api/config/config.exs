@@ -7,23 +7,23 @@
 # General application configuration
 use Mix.Config
 
-config :cookbook,
-  ecto_repos: [Cookbook.Repo]
+config :cookery,
+  ecto_repos: [Cookery.Repo]
 
 # Configures the endpoint
-config :cookbook, CookbookWeb.Endpoint,
+config :cookery, CookeryWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "HBSExTHQc8vLXEE11yAJT5eIMOQdpDlqF655/8tpdDUJVJe7ambBx+VieQcONyU2",
-  render_errors: [view: CookbookWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Cookbook.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: CookeryWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: Cookery.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :cookbook, Cookbook.Auth,
-      issuer: "Cookbook",
+config :cookery, Cookery.Auth,
+      issuer: "Cookery",
       secret_key: "umpN7XAsdpm1GopIIydlZj2GgVnXQ3j48cA2DxWyBchVsn5mXNJs9+JDBBqdX3LN"
 
 # Use Jason for JSON parsing in Phoenix

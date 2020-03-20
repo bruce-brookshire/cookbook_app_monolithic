@@ -1,4 +1,4 @@
-defmodule Cookbook.Repo.Migrations.InitialSchema do
+defmodule Cookery.Repo.Migrations.InitialSchema do
   use Ecto.Migration
 
   def change do
