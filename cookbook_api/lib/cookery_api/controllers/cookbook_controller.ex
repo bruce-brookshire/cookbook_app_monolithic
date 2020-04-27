@@ -1,61 +1,66 @@
 defmodule CookeryWeb.Api.CookbookController do
-  use CookeryWeb, :controller
+  use ExMvc.Controller,
+    adapter: Cookery.SharedCookbooks,
+    view: CookeryWeb.SharedCookbookView
+    # plugs: plug(:verify_owner, :cookbook when action in [:show, :update])
 
-  import CookeryWeb.Plugs.Auth
+  # use CookeryWeb, :controller
 
-  alias Cookery.SharedCookbooks
-  alias Cookery.SharedCookbooks.SharedCookbook
-  alias CookeryWeb.SharedCookbookView
+  # import CookeryWeb.Plugs.Auth
 
-  plug :verify_owner, :cookbook when action in [:show, :update]
+  # alias Cookery.SharedCookbooks
+  # alias Cookery.SharedCookbooks.SharedCookbook
+  # alias CookeryWeb.SharedCookbookView
 
-  def show(conn, %{"id" => id}) do
-    case SharedCookbooks.get_by_id(id) do
-      %SharedCookbook{} = cookbook ->
-        conn
-        |> put_view(SharedCookbookView)
-        |> render("show.json", shared_cookbook: cookbook)
+  # plug :verify_owner, :cookbook when action in [:show, :update]
 
-      _ ->
-        conn |> send_resp(404, "Not found")
-    end
-  end
+  # def show(conn, %{"id" => id}) do
+  #   case SharedCookbooks.get_by_id(id) do
+  #     %SharedCookbook{} = cookbook ->
+  #       conn
+  #       |> put_view(SharedCookbookView)
+  #       |> render("show.json", shared_cookbook: cookbook)
 
-  def cookbooks(%{assigns: %{user: %{id: user_id}}} = conn, params) do
-    cookbooks = SharedCookbooks.get_user_cookbooks(user_id)
+  #     _ ->
+  #       conn |> send_resp(404, "Not found")
+  #   end
+  # end
 
-    conn
-    |> put_view(SharedCookbookView)
-    |> render("index.json", shared_cookbooks: cookbooks)
-  end
+  # def cookbooks(%{assigns: %{user: %{id: user_id}}} = conn, params) do
+  #   cookbooks = SharedCookbooks.get_user_cookbooks(user_id)
 
-  def create(%{assigns: %{user: %{id: user_id}}} = conn, params) do
-    result =
-      params
-      |> Map.put("user_id", user_id)
-      |> SharedCookbooks.create()
+  #   conn
+  #   |> put_view(SharedCookbookView)
+  #   |> render("index.json", shared_cookbooks: cookbooks)
+  # end
 
-    case result do
-      {:ok, cookbook} ->
-        conn
-        |> put_view(SharedCookbookView)
-        |> render("show.json", shared_cookbook: cookbook)
+  # def create(%{assigns: %{user: %{id: user_id}}} = conn, params) do
+  #   result =
+  #     params
+  #     |> Map.put("user_id", user_id)
+  #     |> SharedCookbooks.create()
 
-      _ ->
-        conn
-        |> send_resp(422, "Invalid Parameters")
-    end
-  end
+  #   case result do
+  #     {:ok, cookbook} ->
+  #       conn
+  #       |> put_view(SharedCookbookView)
+  #       |> render("show.json", shared_cookbook: cookbook)
 
-  def update(conn, %{"id" => id} = params) do
-    with %SharedCookbook{} = old_cookbook <- SharedCookbooks.get_by_id(id),
-         {:ok, new_cookbook} <- SharedCookbooks.update(old_cookbook, params) do
-      conn
-      |> put_view(SharedCookbookView)
-      |> render("show.json", shared_cookbook: new_cookbook)
-    else
-      nil -> send_resp(conn, 404, "Not found")
-      _ -> send_resp(conn, 422, "Invalid Parameters")
-    end
-  end
+  #     _ ->
+  #       conn
+  #       |> send_resp(422, "Invalid Parameters")
+  #   end
+  # end
+
+  # def update(conn, %{"id" => id} = params) do
+  #   with %SharedCookbook{} = old_cookbook <- SharedCookbooks.get_by_id(id),
+  #        {:ok, new_cookbook} <- SharedCookbooks.update(old_cookbook, params) do
+  #     conn
+  #     |> put_view(SharedCookbookView)
+  #     |> render("show.json", shared_cookbook: new_cookbook)
+  #   else
+  #     nil -> send_resp(conn, 404, "Not found")
+  #     _ -> send_resp(conn, 422, "Invalid Parameters")
+  #   end
+  # end
 end

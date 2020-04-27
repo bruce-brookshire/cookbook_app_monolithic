@@ -8,8 +8,8 @@ defmodule CookeryWeb.UserView do
     do: %{
       id: user.id,
       email: user.email,
-      shared_cookbooks: render_many(user.shared_cookbooks, SharedCookbookView, "show.json"),
-      cookbooks: render_many(user.cookbooks, SharedCookbookView, "show.json")
+      shared_cookbooks: render_many(user.shared_cookbooks, SharedCookbookView, "show.json", as: :model),
+      cookbooks: render_many(user.cookbooks, SharedCookbookView, "show.json", as: :model)
     }
 
   def render("index.json", %{users: users}),

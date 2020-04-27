@@ -3,7 +3,7 @@ defmodule Cookery.CookbookParticipants.CookbookParticipant do
 
   import Ecto.Changeset
 
-  alias Cookery.SharedCookbooks.SharedCookbooks
+  alias Cookery.SharedCookbooks.SharedCookbook
   alias Cookery.CookbookParticipants.CookbookParticipant
 
   schema "cookbook_participants" do

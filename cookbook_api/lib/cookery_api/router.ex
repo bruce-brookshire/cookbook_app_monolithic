@@ -34,7 +34,7 @@ defmodule CookeryWeb.Router do
     get "/users/shared_cookbooks", CookbookController, :cookbooks
     resources "/users", UserController, only: [:show, :update]
     
-    resources "/shared_cookbooks", CookbookController, only: [:show, :create, :update] do
+    resources "/shared_cookbooks", CookbookController, only: [:index, :show, :create, :update] do
       resources "/invitations", Cookbook.InvitationController, only: [:index, :show, :create, :update]
     end
   end

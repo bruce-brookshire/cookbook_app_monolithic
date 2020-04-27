@@ -6,7 +6,7 @@ defmodule Cookery.SharedCookbooks do
   alias Cookery.CookbookInvites.CookbookInvite
   alias Cookery.SharedCookbooks.SharedCookbook
 
-  def get_by_id(id), do: Repo.get(SharedCookbook, id)
+  use ExMvc.Adapter, model: SharedCookbook
 
   def get_user_cookbooks(user_id) do
     owned_cookbooks = from(s in SharedCookbook)
@@ -19,17 +19,5 @@ defmodule Cookery.SharedCookbooks do
     |> Repo.all() || []
 
     owned_cookbooks ++ shared_cookbooks
-  end
-
-  def create(params) do
-    params
-    |> SharedCookbook.insert_changeset
-    |> Repo.insert
-  end
-  
-  def update(%SharedCookbook{} = cookbook, params) do
-    cookbook
-    |> SharedCookbook.update_changeset(params)
-    |> Repo.update
   end
 end

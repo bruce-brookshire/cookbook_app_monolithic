@@ -25,7 +25,7 @@ defmodule Cookery.SharedCookbooks.SharedCookbook do
     |> validate_required(@req_fields)
   end
 
-  def update_changeset(%SharedCookbook{} = cookbook, attrs) do
+  def changeset(%SharedCookbook{} = cookbook, attrs) do
     cookbook
     |> cast(attrs, @all_fields)
     |> validate_required(@req_fields)

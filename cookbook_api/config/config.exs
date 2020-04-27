@@ -17,14 +17,16 @@ config :cookery, CookeryWeb.Endpoint,
   render_errors: [view: CookeryWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: Cookery.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :ex_mvc, repo: Cookery.Repo, web_namespace: CookeryWeb
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
 config :cookery, Cookery.Auth,
-      issuer: "Cookery",
-      secret_key: "umpN7XAsdpm1GopIIydlZj2GgVnXQ3j48cA2DxWyBchVsn5mXNJs9+JDBBqdX3LN"
+  issuer: "Cookery",
+  secret_key: "umpN7XAsdpm1GopIIydlZj2GgVnXQ3j48cA2DxWyBchVsn5mXNJs9+JDBBqdX3LN"
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
